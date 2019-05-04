@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
+  "devToolsPort": 19003,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://da-7dj.beardboy.lavendimia.exp.direct",
-  "packagerNgrokUrl": "https://packager.da-7dj.beardboy.lavendimia.exp.direct",
-  "ngrokPid": 45737
+  "packagerPort": 19001,
+  "packagerPid": 59793,
+  "expoServerNgrokUrl": "https://da-7dj.anonymous.lavendimia.exp.direct",
+  "packagerNgrokUrl": "https://packager.da-7dj.anonymous.lavendimia.exp.direct",
+  "ngrokPid": 59810
 }
