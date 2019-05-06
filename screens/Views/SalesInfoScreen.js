@@ -30,6 +30,7 @@ export default class SalesInfoScreen extends Component {
     async componentDidMount() {
         let clients = await SERVICES.users()
         let articles = await SERVICES.articles()
+        let date = await SERVICES.getDate()
         let configuration = await AsyncStorage.getItem('CONFIGURATION')
         if (configuration === null) {
             this.props.navigation.goBack()
@@ -53,7 +54,7 @@ export default class SalesInfoScreen extends Component {
                 this.setState({
                     isLoading: false, date: date, tasa: config.
                         tasa, plazo: config.plazo, enganche: config.enganche,
-                    clients: clients, articles: articles
+                    clients: clients, articles: articles, date: date
                 })
             }
         }
@@ -141,6 +142,30 @@ export default class SalesInfoScreen extends Component {
         let importe = this.getImporte()
         let total = importe - enganche - boniEnganche
         return total
+    }
+
+    async saveSale(){
+        let date = this.state.date
+        let total = this.getTotal()
+        let client = this.state.clientSelected
+        let sale = await SERVICES.create_sale(total.toFixed(2),client.id)
+        if (sale.result) {
+			console.log("Respuesta final", sale)
+
+			showMessage({
+				message: "Respuesta exitosa",
+				description: sale.message,
+				type: "success",
+			});
+			this.props.navigation.goBack()
+		} else {
+			console.log("Respuesta final", sale.message)
+			showMessage({
+				message: "Error",
+				description: sale.message,
+				type: "danger",
+			});
+		}
     }
 
 
@@ -283,9 +308,9 @@ export default class SalesInfoScreen extends Component {
                                         <Text style={{ flex: 1, fontSize: 14, color: "#00AB68", textAlign: "right" }}>$ {this.getTotal().toFixed(2)}</Text>
                                     </View>
                                     <Button
-                                        title="Siguente"
+                                        title="Guardar"
                                         buttonStyle={{ backgroundColor: "#00AB68", width: "100%", paddingVertical: 15, marginVertical: 5 }}
-                                        onPress={() => this.createOrder()}
+                                        onPress={() => this.saveSale()}
                                     />
                                 </View> : null}
                         </ScrollView>

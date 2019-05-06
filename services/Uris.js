@@ -9,6 +9,8 @@ const URIS = {
     update_client: `${API_ENDPOINT}update_client`,
     create_article: `${API_ENDPOINT}create_article`,
     update_article: `${API_ENDPOINT}update_article`,
+    create_sale: `${API_ENDPOINT}create_sale`,
+    
 }
 
 

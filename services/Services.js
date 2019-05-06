@@ -89,6 +89,17 @@ const SERVICES = {
 			return error
 		}
 	},
+	async create_sale(total,clientid) {
+		try {
+			let response = await axios.post(URIS.create_sale,{total: total,
+				clientid: clientid});
+		
+			return response.data
+
+		} catch (error) {
+			return error
+		}
+	},
 }
 
 export default SERVICES

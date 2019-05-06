@@ -61,36 +61,33 @@ export default class FavoritesScreen extends Component {
               <Text style={{fontSize: 20}}>No existen ventas</Text>
             </View>
             :
-            <View style={{ flex: 1 }}>
-            <View style={{width: "100%", flexDirection: "row"}}>
-            <Text>Folio venta</Text>
-            <Text>Clave cliente</Text>
-            <Text>Nombre</Text>
-            <Text>Total</Text>
-            <Text>Fecha</Text>
-            <Text>Status</Text>
-            </View>
-              <FlatList
-                data={this.state.sales}
-                refreshing={this.state.refreshing}
-                renderItem={({ item, index }) =>
-                  <View style={{ flex: 1 }} >
-                    <TouchableHighlight style={{ flex: .8, borderColor: "#dadada", borderWidth: .3, borderRadius: 10, marginBottom: 10, marginTop: 10, marginHorizontal: 25, paddingVertical: 10, paddingHorizontal: 10 }} underlayColor="white" onPress={() => this.props.navigation.navigate('ShowProduct', { productId: item.id })}>
-                      <View style={{ flexDirection: "row", padding: 5 }}>
-                        <View style={{ flex: .5, justifyContent: "center" }}>
-                          <Image style={{ width: 50, height: 50 }} resizeMode={"cover"} source={{ uri: `${URIS.ENDPOINT_IMAGE}${item.image1}` }} />
-                        </View>
-                        <View style={{ flex: 1.5, flexDirection: "column", marginHorizontal: 20 }}>
-                          <Text style={{ marginVertical: 2, fontSize: 16, }}>{item.short_desc}  </Text>
-                          <Text style={{ color: "gray", marginVertical: 2, justifyContent: "flex-end", alignItems: "flex-end", color: "#00AB68" }}>$ {item.price.toFixed(2)}</Text>
-                        </View>
-                      </View>
-                    </TouchableHighlight>
-                  </View>
-                }
-                keyExtractor={(item, index) => index.toString()}
-              />
-            </View>
+            <View style={{ flex: 1, flexDirection: "column" }}>
+                                <View style={{ flexDirection: "row", borderTopColor: "black", borderTopWidth: 1, borderBottomColor: "black", borderBottomWidth: 1 }}>
+                                    <Text style={{ flex: 1, textAlign: "center" }}>Folio venta</Text>
+                                    <Text style={{ flex: 1, textAlign: "center" }}>Clave cliente</Text>
+                                    <Text style={{ flex: 1, textAlign: "center" }}>Nombre</Text>
+                                    <Text style={{ flex: 1, textAlign: "center" }}>Total</Text>
+                                    <Text style={{ flex: 1, textAlign: "center" }}>Estatus</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <FlatList
+                                        data={this.state.sales}
+                                        refreshing={this.state.refreshing}
+                                        style={{ marginTop: 10 }}
+                                        renderItem={({ item, index }) =>
+                                            <View style={{ flex: 1, flexDirection: "row", borderBottomColor: "black", borderBottomWidth: 1 }} >
+                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.sale.id}</Text>
+                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.sale.clientid}</Text>
+                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.user.name} {item.user.lastname}</Text>
+                                                <Text style={{ flex: 1, textAlign: "center" }}>${item.sale.total}</Text>
+                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.sale.status === 1 ? "Activo": "No activo"}</Text>
+                                                
+                                            </View>
+                                        }
+                                        keyExtractor={(item, index) => index.toString()}
+                                    />
+                                </View>
+                            </View>
           }
           <ActionButton
 						buttonColor="#00AB68"
